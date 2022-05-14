@@ -2,19 +2,21 @@ import React, { useEffect, useRef, forwardRef } from 'react';
 
 const VideoNode = forwardRef((props, ref) => {
 
+	const fileObject = props.fileObject;
+
 	useEffect(() => {
 		ref.current?.load();
-	}, [props]);
+	}, [props.fileObject]);
 
 	let videoNodeVisibility = {
 		visibility: 'visible',
 	};
 
-	if (props.fileURL == '') { videoNodeVisibility = { visibility: 'hidden', } }; 
+	if (fileObject.url == undefined) { videoNodeVisibility = { visibility: 'hidden', } }; 
 
 	return (
 		<video ref={ref} style={videoNodeVisibility} id="videoContent" controls>
-			<source src={props.fileURL} type={props.fileType} />
+			<source src={fileObject.url} type={fileObject.type} />
 		</video>
 	)
 })

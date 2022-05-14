@@ -13,7 +13,7 @@ const HeaderLayout = () => {
 
 	return (
 		<>
-			<nav>
+			<nav id="navigation">
 				<ul>
 					<li>
 						<a onClick={startpage}>Start Page</a>

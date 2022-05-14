@@ -1,15 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
-import VideoNode from './VideoNode';
 import VideoSettings from './VideoSettings';
 
 const Video = (props) => {
 
+	const fileObject = props.fileObject;
 	const videoRef = useRef();
 
+	useEffect(() => {
+		videoRef.current?.load?.();
+	}, [fileObject]);
+
+	const isVisible = (videoRef.current == undefined) ? {visibility: 'hidden'} : {visibility: 'visible'}
+	const videoNode =  
+			<video ref={videoRef} id="video" style={isVisible} controls>
+				<source src={fileObject.url} type={fileObject.type} />
+			</video>;
+
 	return (
-		<div id="videoContent-container">
-			<VideoNode ref={videoRef} fileURL={props.fileURL} fileType={props.fileType} />
-			<VideoSettings videoRef={videoRef} fileName={props.fileName} />
+		<div className="video">
+			{videoNode}
+			<VideoSettings videoRef={videoRef} fileObject={fileObject} />
 		</div>
 	       );
 };

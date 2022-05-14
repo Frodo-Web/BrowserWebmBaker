@@ -4,19 +4,21 @@ import MakePositions from './MakePositions';
 
 const VideoSettings = (props) => {
 
+	const fileObject = props.fileObject;
+
 	const [duration, setDuration] = useState(0);
 
 	const videoElement = props.videoRef.current;
 
 	if (videoElement != undefined ) {
-		videoElement.onloadedmetadata = () => setDuration(videoElement.duration); 
-	}
+		videoElement.ondurationchange = () => setDuration(videoElement.duration); 
+	};
 
 	const showFileName = () => {
-		if (props.fileName != '') {
+		if (fileObject.name != undefined) {
 			return (
-				<div>
-					<h1>Filename: {props.fileName}</h1>
+				<div id="filename">
+					<h1>Filename: {fileObject.name}</h1>
 				</div>
 			)
 		};
@@ -25,18 +27,18 @@ const VideoSettings = (props) => {
  	const showVideoDuration = () => {
 		if (videoElement != undefined) {
 			return (
-				<>
+				<div id="duration">
 					<h2>Duration: {duration}</h2>
-				</>
+				</div>
 			       )
 		};
 	};
 
 	return (
-		<div id="videoSettings-container">
+		<div className="videoSettings">
 			{showFileName()}
 			{showVideoDuration()}
-			<MakePositions videoElement={videoElement} />
+			<MakePositions videoElement={videoElement} duration={duration} />
 			<SetVideoTime videoElement={videoElement} firstSliderStep={0.04166} secondSliderStep={0.01} duration={duration} />
 		</div>
 	       );

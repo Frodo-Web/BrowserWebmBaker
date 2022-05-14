@@ -5,6 +5,7 @@ const App = () => {
 
 	localStorage.removeItem('capture');
 	localStorage.removeItem('setvideotime');
+	localStorage.removeItem('makepositions');
 
 	return (
 		<HeaderLayout />

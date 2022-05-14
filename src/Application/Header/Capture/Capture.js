@@ -1,37 +1,39 @@
 import React, { Component, useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import SelectFile from './SelectFile';
 import getVideoURL from './getVideoURL';
 import Video from './Video/Video';
 
 const Capture = () => {
-	const [fileURL, setURL] = useState('');
-	const [fileType, setType] = useState('');
-	const [fileName, setName] = useState('');
+	const [fileObject, setFileObject] = useState({});
 
 	useEffect(() => {
 		const capture = localStorage.getItem('capture');
 		if (capture != null) {
 			const captureObject = JSON.parse(capture);
-			setURL(captureObject.f_url);
-			setType(captureObject.f_type);
-			setName(captureObject.f_name);
+			setFileObject({name: captureObject.f_name, type: captureObject.f_type, url: captureObject.f_url});
 		}; 
 	}, []);
+
+	useEffect(() => {
+		if (Object.keys(fileObject).length != 0) updateLocalStorage();
+	}, [fileObject]);
+
+	const updateLocalStorage = () => localStorage.setItem('capture', JSON.stringify({f_name: fileObject.name, f_type: fileObject.type, f_url: fileObject.url}));
+
+	const updateFileObject = (fObject) => {
+		const fObjectURL = getVideoURL(fObject);
+		setFileObject({name: fObject.name, type: fObject.type, url: fObjectURL});
+	};
 	
 	const onSelect = (e) => {
-		const fileObject = e.target.files[0];
-		const fileObjectURL = getVideoURL(fileObject);
-		setURL(fileObjectURL);
-		setType(fileObject.type);
-		setName(fileObject.name);
-		localStorage.setItem('capture', JSON.stringify({f_name: fileObject.name, f_type: fileObject.type, f_url: fileObjectURL}));
+		localStorage.removeItem('makepositions');
+		updateFileObject(e.target.files[0]);
 	};
 
 	return (
-		<div id="timing-container">
+		<div className="capture">
 		   <SelectFile onFileSelect={onSelect} />
-		   <Video fileURL={fileURL} fileType={fileType} fileName={fileName} />
+			 <Video fileObject={fileObject} />
 		</div>
          );
 };

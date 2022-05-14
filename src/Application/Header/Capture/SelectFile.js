@@ -2,9 +2,9 @@ import React from 'react';
 
 const SelectFile = (props) => {
 	return (
-		<div id="selectFile-container">
-			<label htmlFor="selectButton">Select a file: </label>
-			<input id="selectButton" type="file" onChange={props.onFileSelect} />
+		<div className="selectFile">
+			<label htmlFor="selectFile">Select a file: </label>
+			<input id="selectFile" type="file" onChange={props.onFileSelect} />
 		</div>
 	       );
 };
