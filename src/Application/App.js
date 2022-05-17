@@ -6,6 +6,8 @@ const App = () => {
 	localStorage.removeItem('capture');
 	localStorage.removeItem('setvideotime');
 	localStorage.removeItem('makepositions');
+	localStorage.removeItem('bakery');
+	localStorage.removeItem('tasks');
 
 	return (
 		<HeaderLayout />
