@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Task from './Task';
+import SendTasksToServer from './SendTasksToServer';
 
 const Tasks = () => {
 
@@ -48,6 +49,7 @@ const Tasks = () => {
 	return (
 		<>
 			<h2>Tasks: </h2>
+			<SendTasksToServer tasks={tasks} />
 			<ul>{listTasks}</ul>
 		</>
 	       );

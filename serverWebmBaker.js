@@ -1,9 +1,26 @@
+const fs = require('fs');
 const express = require('express');
 const app = express();
+const port = 8080;
 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
 	res.send('Hello World!');
 });
 app.listen(3000, function() {
 	console.log('listening on port 3000!');
+}); */
+
+app.use(express.static(__dirname + '/public'));
+app.use(express.json());
+
+app.get('/', function(request, response){
+	response.send('Hello!!');
+});
+
+app.post('/processAll', function(request, response) {
+	console.log(request.body);
+});
+
+app.listen(port, function() {
+	console.log(`listening on port ${port}`);
 });
