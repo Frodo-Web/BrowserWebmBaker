@@ -3,27 +3,40 @@ const { spawnSync } = require('child_process');
 
 const FFmpeg = (task) => {
     console.log(task)
-    const args = [
+    const inputFile = yourPaths.inputFolder + '\\' + task.filename;
+    const outputFile = yourPaths.outputFolder + '\\' + task.outputFileName;
+
+    const basicArgs = [
         '-ss', (task.startPosition).toString(),
-        '-i', yourPaths.inputFolder + '\\' + task.filename,
+        '-i', inputFile,
         '-t', (task.duration).toString(),
-        '-qmin', (task.qmin).toString(),
-        '-qmax', (task.qmax).toString(),
-        '-qcomp', (task.qcomp).toString(),
-        '-crf', (task.crf).toString(),
-        '-deadline', task.deadline,
-        '-c:v', task.vCodec,
-        '-c:a', task.aCodec,
-        '-q:a', (task.audioQuality).toString(),
-        '-threads', (task.threads).toString(),
-        '-cpu-used', (task.cpuUsed).toString(),
-        yourPaths.outputFolder + '\\' + task.outputFileName,
+        ... (task.qmin !== undefined) ? ['-qmin', (task.qmin).toString()] : [],
+        ... (task.qmax !== undefined) ? ['-qmax', (task.qmax).toString()] : [],
+        ... (task.qcomp !== undefined) ? ['-qcomp', (task.qcomp).toString()] : [],
+        ... (task.crf !== undefined) ? ['-crf', (task.crf).toString()] : [],
+        ... (task.deadline !== undefined) ? ['-deadline', task.deadline] : [],
+        ... (task.vCodec !== undefined) ? ['-c:v', task.vCodec] : [],
+        ... (task.aCodec !== undefined) ? ['-c:a', task.aCodec] : [],
+        ... (task.audioQuality !== undefined) ? ['-q:a', (task.audioQuality).toString()] : [],
+        ... (task.threads !== undefined) ? ['-threads', (task.threads).toString()] : [],
+        ... (task.cpuUsed !== undefined) ? ['-cpu-used', (task.cpuUsed).toString()] : [],
     ]
-    const runFFmpeg = () => {
+    const runFFmpeg = (args) => {
         const result = spawnSync('ffmpeg', args, { stdio: 'inherit', encoding: 'utf8' });
         console.log(result);
     }
-    runFFmpeg();
+    if (task.pass) {
+        let doublePassArgs = [];
+        for (i = 1; i <= 2; i++) {
+            doublePassArgs = [...basicArgs, '-pass', (i).toString(), outputFile];
+            runFFmpeg(doublePassArgs);
+        }
+
+    } else {
+        const singlePassArgs = [...basicArgs, outputFile];
+        runFFmpeg(singlePassArgs);
+    }
+    
 }
 
 module.exports = { FFmpeg };

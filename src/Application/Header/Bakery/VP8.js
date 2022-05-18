@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import FFmpegLinePreview from './FFmpegLinePreview';
 
 const VP8 = (props) => {
+	
+	const defaultValues = {
+		qmin: 0, qmax: 40, qcomp: 0.6, crf: 10, deadline: 'best', vCodec: 'libvpx', aCodec: 'libvorbis',
+		audioQuality: 3, threads: 1, cpuUsed: 0, pass: true,
+	};
 
-	const [options, setOptions] = useState({...props.options, qmin: 4, qmax: 40, qcomp: 0.6,
-		crf: 10, deadline: 'best', vCodec: 'libvpx', aCodec: 'libvorbis', audioQuality: 3, threads: 1, 
-		cpuUsed: 0, pass: true, });
+	const [options, setOptions] = useState({...props.options, ...defaultValues });
 
 	useEffect(() => {
 		const defaultOutputFileName = getDefaultOutputFilename();
@@ -93,7 +96,8 @@ const VP8 = (props) => {
 	};
 
 	const handleDeadline = (e) => {
-		const value = e.target.value;
+		let value = e.target.value;
+		if (value === 'undefined') value = undefined;
 		setOptions(prevOptions => {
 			return {...prevOptions, deadline: value}
 		});
@@ -114,6 +118,20 @@ const VP8 = (props) => {
 		setOptions(prevOptions => {
 			return {...prevOptions, pass: value}
 		});
+	};
+
+	const handleToggle = (e) => {
+		const id = e.target.previousElementSibling.childNodes[1].id
+
+		if(options[id] !== undefined) {
+			setOptions(prevOptions => {
+				return {...prevOptions, [id]: undefined}
+			});
+		} else {
+			setOptions(prevOptions => {
+				return {...prevOptions, [id]: defaultValues[id]}
+			});
+		} 
 	};
 
 	const addTask = () => {
@@ -146,26 +164,67 @@ const VP8 = (props) => {
 					<input id="inputFilename" type="text" value={options.filename} disabled/>
 					<label htmlFor="outputFilename">Output Filename: </label>
 					<input id="outputFilename" type="text" value={options.outputFileName} onChange={handleOutputFilename}/>
-					<label htmlFor="qmin">qmin </label>
-					<input type="number" id="qmin" min="0" max="63" value={options.qmin} onChange={commonHandler}/>
-					<label htmlFor="qmax">qmax </label>
-					<input type="number" id="qmax" min="0" max="63" step="3" value={options.qmax} onChange={commonHandler}/>
-					<label htmlFor="qcomp">qcomp </label>
-					<input type="number" id="qcomp" min="0" max="1" step=".1" value={options.qcomp} onChange={handleQcomp}/>
-					<label htmlFor="crf">crf </label>
-					<input type="number" id="crf" min="4" max="63" step="1" value={options.crf} onChange={commonHandler}/>
-					<label htmlFor="deadline">deadline </label>
-					<select id="deadline" name="deadline" value={options.deadline} onChange={handleDeadline}>
-						<option value="best">best</option>
-						<option value="good">good</option>
-						<option value="realtime">realtime</option>
-					</select>
-					<label htmlFor="qa">qa </label>
-					<input type="number" id="qa" min="0" max="10" step=".5" value={options.audioQuality} onChange={handleVorbisQuality} />
-					<label htmlFor="threads">threads </label>
-					<input type="number" id="threads" min="0" step="1" value={options.threads} onChange={commonHandler}/>
-					<label htmlFor="cpuUsed">cpu_used </label>
-					<input type="number" id="cpuUsed" min="0" max="2" step="1" value={options.cpuUsed} onChange={commonHandler}/>
+					<div>
+						<div>
+							<label htmlFor="qmin">qmin </label>
+							<input type="number" id="qmin" min="0" max="63" value={options.qmin} onChange={commonHandler}/>
+						</div>
+						<input type="checkbox" checked={(options.qmin != undefined) ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="qmax">qmax </label>
+							<input type="number" id="qmax" min="0" max="63" step="3" value={options.qmax} onChange={commonHandler}/>
+						</div>
+						<input type="checkbox" checked={(options.qmax != undefined) ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="qcomp">qcomp </label>
+							<input type="number" id="qcomp" min="0" max="1" step=".1" value={options.qcomp} onChange={handleQcomp}/>
+						</div>
+						<input type="checkbox" checked={(options.qcomp != undefined) ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="crf">crf </label>
+							<input type="number" id="crf" min="4" max="63" step="1" value={options.crf} onChange={commonHandler}/>
+						</div>
+						<input type="checkbox" checked={(options.crf != undefined) ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="deadline">deadline </label>
+							<select id="deadline" name="deadline" value={(options.deadline) ? options.deadline : 'undefined'} onChange={handleDeadline}>
+								<option value="best">best</option>
+								<option value="good">good</option>
+								<option value="realtime">realtime</option>
+								<option value="undefined">undefined</option>
+							</select>
+						</div>
+						<input type="checkbox" checked={(options.deadline != undefined) ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="qa">qa </label>
+							<input type="number" id="audioQuality" min="0" max="10" step=".5" value={options.audioQuality} onChange={handleVorbisQuality} />
+						</div>
+						<input type="checkbox" checked={(options.audioQuality != undefined) ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="threads">threads </label>
+							<input type="number" id="threads" min="0" step="1" value={options.threads} onChange={commonHandler}/>
+						</div>
+						<input type="checkbox" checked={(options.threads != undefined) ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="cpuUsed">cpu_used </label>
+							<input type="number" id="cpuUsed" min="0" max="2" step="1" value={options.cpuUsed} onChange={commonHandler}/>
+						</div>
+						<input type="checkbox" checked={(options.cpuUsed != undefined) ? true : false} onChange={handleToggle} />
+					</div>
 					<label htmlFor="pass">double pass: </label>
 					<input type="checkbox" id="pass" checked={options.pass} onChange={handlePass} />
 					<button type="button" id="addTask" onClick={addTask}>Add to Tasks</button>
