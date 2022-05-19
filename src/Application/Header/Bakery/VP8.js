@@ -97,7 +97,6 @@ const VP8 = (props) => {
 
 	const handleDeadline = (e) => {
 		let value = e.target.value;
-		if (value === 'undefined') value = undefined;
 		setOptions(prevOptions => {
 			return {...prevOptions, deadline: value}
 		});
@@ -123,9 +122,9 @@ const VP8 = (props) => {
 	const handleToggle = (e) => {
 		const id = e.target.previousElementSibling.childNodes[1].id
 
-		if(options[id] !== undefined) {
+		if(options[id] !== 'undefined') {
 			setOptions(prevOptions => {
-				return {...prevOptions, [id]: undefined}
+				return {...prevOptions, [id]: 'undefined'}
 			});
 		} else {
 			setOptions(prevOptions => {
@@ -167,63 +166,63 @@ const VP8 = (props) => {
 					<div>
 						<div>
 							<label htmlFor="qmin">qmin </label>
-							<input type="number" id="qmin" min="0" max="63" value={options.qmin} onChange={commonHandler}/>
+							<input type="number" id="qmin" min="0" max="63" value={(options.qmin !== 'undefined') ? options.qmin : defaultValues.qmin} onChange={commonHandler}/>
 						</div>
-						<input type="checkbox" checked={(options.qmin != undefined) ? true : false} onChange={handleToggle} />
+						<input type="checkbox" checked={(options.qmin !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<div>
 						<div>
 							<label htmlFor="qmax">qmax </label>
-							<input type="number" id="qmax" min="0" max="63" step="3" value={options.qmax} onChange={commonHandler}/>
+							<input type="number" id="qmax" min="0" max="63" step="3" value={(options.qmax !== 'undefined') ? options.qmax : defaultValues.qmax} onChange={commonHandler}/>
 						</div>
-						<input type="checkbox" checked={(options.qmax != undefined) ? true : false} onChange={handleToggle} />
+						<input type="checkbox" checked={(options.qmax !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<div>
 						<div>
 							<label htmlFor="qcomp">qcomp </label>
-							<input type="number" id="qcomp" min="0" max="1" step=".1" value={options.qcomp} onChange={handleQcomp}/>
+							<input type="number" id="qcomp" min="0" max="1" step=".1" value={(options.qcomp !== 'undefined') ? options.qcomp : defaultValues.qcomp} onChange={handleQcomp}/>
 						</div>
-						<input type="checkbox" checked={(options.qcomp != undefined) ? true : false} onChange={handleToggle} />
+						<input type="checkbox" checked={(options.qcomp !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<div>
 						<div>
 							<label htmlFor="crf">crf </label>
-							<input type="number" id="crf" min="4" max="63" step="1" value={options.crf} onChange={commonHandler}/>
+							<input type="number" id="crf" min="4" max="63" step="1" value={(options.crf !== 'undefined') ? options.crf : defaultValues.crf} onChange={commonHandler}/>
 						</div>
-						<input type="checkbox" checked={(options.crf != undefined) ? true : false} onChange={handleToggle} />
+						<input type="checkbox" checked={(options.crf !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<div>
 						<div>
 							<label htmlFor="deadline">deadline </label>
-							<select id="deadline" name="deadline" value={(options.deadline) ? options.deadline : 'undefined'} onChange={handleDeadline}>
+							<select id="deadline" name="deadline" value={options.deadline} onChange={handleDeadline}>
 								<option value="best">best</option>
 								<option value="good">good</option>
 								<option value="realtime">realtime</option>
 								<option value="undefined">undefined</option>
 							</select>
 						</div>
-						<input type="checkbox" checked={(options.deadline != undefined) ? true : false} onChange={handleToggle} />
+						<input type="checkbox" checked={(options.deadline !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<div>
 						<div>
 							<label htmlFor="qa">qa </label>
-							<input type="number" id="audioQuality" min="0" max="10" step=".5" value={options.audioQuality} onChange={handleVorbisQuality} />
+							<input type="number" id="audioQuality" min="0" max="10" step=".5" value={(options.audioQuality !== 'undefined') ? options.audioQuality : defaultValues.audioQuality} onChange={handleVorbisQuality} />
 						</div>
-						<input type="checkbox" checked={(options.audioQuality != undefined) ? true : false} onChange={handleToggle} />
+						<input type="checkbox" checked={(options.audioQuality !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<div>
 						<div>
 							<label htmlFor="threads">threads </label>
-							<input type="number" id="threads" min="0" step="1" value={options.threads} onChange={commonHandler}/>
+							<input type="number" id="threads" min="0" step="1" value={(options.threads !== 'undefined') ? options.threads : defaultValues.threads} onChange={commonHandler}/>
 						</div>
-						<input type="checkbox" checked={(options.threads != undefined) ? true : false} onChange={handleToggle} />
+						<input type="checkbox" checked={(options.threads !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<div>
 						<div>
 							<label htmlFor="cpuUsed">cpu_used </label>
-							<input type="number" id="cpuUsed" min="0" max="2" step="1" value={options.cpuUsed} onChange={commonHandler}/>
+							<input type="number" id="cpuUsed" min="0" max="2" step="1" value={(options.cpuUsed !== 'undefined') ? options.cpuUsed : defaultValues.cpuUsed} onChange={commonHandler}/>
 						</div>
-						<input type="checkbox" checked={(options.cpuUsed != undefined) ? true : false} onChange={handleToggle} />
+						<input type="checkbox" checked={(options.cpuUsed !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<label htmlFor="pass">double pass: </label>
 					<input type="checkbox" id="pass" checked={options.pass} onChange={handlePass} />
