@@ -13,7 +13,9 @@ const FFmpegLinePreview = (props) => {
 			 {(options.crf !== 'undefined') ? ` -crf: ${options.crf}` : ''}
 			 {(options.deadline !== 'undefined') ? ` -deadline: ${options.deadline}` : ''}
 			 {(options.vCodec !== 'undefined') ? ` -c:v: ${options.vCodec}` : ''}
-			 {(options.aCodec !== 'undefined') ? ` -c:a: ${options.aCodec}` : ''} 
+			 {(options.vBitrate !== 'undefined') ? ` -b:v: ${options.vBitrate}` : ''}
+			 {(options.aCodec !== 'undefined') ? ` -c:a: ${options.aCodec}` : ''}
+			 {(options.aBitrate !== 'undefined') ? ` -b:a: ${options.aBitrate}` : ''}
 			 {(options.audioQuality !== 'undefined') ? ` -q:a: ${options.audioQuality}` : ''} 
 			 {(options.threads !== 'undefined') ? ` -threads: ${options.threads}` : ''}
 			 {(options.cpuUsed !== 'undefined') ? ` -cpu-used: ${options.cpuUsed}` : ''} 

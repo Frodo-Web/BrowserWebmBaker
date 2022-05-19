@@ -4,11 +4,11 @@ import FFmpegLinePreview from './FFmpegLinePreview';
 const VP8 = (props) => {
 	
 	const defaultValues = {
-		qmin: 0, qmax: 40, qcomp: 0.6, crf: 10, deadline: 'best', vCodec: 'libvpx', aCodec: 'libvorbis',
-		audioQuality: 3, threads: 1, cpuUsed: 0, pass: true,
+		qmin: 0, qmax: 40, qcomp: 0.6, crf: 10, deadline: 'best', vCodec: 'libvpx', vBitrate: '1000K',
+		aCodec: 'libvorbis', aBitrate: '192K', audioQuality: 3, threads: 1, cpuUsed: 0, pass: true,
 	};
 
-	const [options, setOptions] = useState({...props.options, ...defaultValues });
+	const [options, setOptions] = useState({...props.options, ...defaultValues, aBitrate: 'undefined' });
 
 	useEffect(() => {
 		const defaultOutputFileName = getDefaultOutputFilename();
@@ -68,7 +68,7 @@ const VP8 = (props) => {
 					return {...prevOptions, qmax: value}
 				});
 			};
-			if (e.target.id === "crf" && value >= 4 && value >= options.qmin && value <= options.qmax) {
+			if (e.target.id === "crf" && value >= 4 ) {
 				setOptions(prevOptions => {
 					return {...prevOptions, crf: value}
 				});
@@ -100,6 +100,20 @@ const VP8 = (props) => {
 		setOptions(prevOptions => {
 			return {...prevOptions, deadline: value}
 		});
+	};
+
+	const handleBitrate = (e) => {
+		let value = e.target.value;
+		if (e.target.id === "vBitrate") {
+			setOptions(prevOptions => {
+				return {...prevOptions, vBitrate: value}
+			});
+		};
+		if (e.target.id === "aBitrate") {
+			setOptions(prevOptions => {
+				return {...prevOptions, aBitrate: value}
+			});
+		};
 	};
 	
 	const handleVorbisQuality = (e) => {
@@ -205,7 +219,21 @@ const VP8 = (props) => {
 					</div>
 					<div>
 						<div>
-							<label htmlFor="qa">qa </label>
+							<label htmlFor="vBitrate">b:v </label>
+							<input type="text" id="vBitrate" value={(options.vBitrate !== 'undefined') ? options.vBitrate : defaultValues.vBitrate} onChange={handleBitrate}></input>
+						</div>
+						<input type="checkbox" checked={(options.vBitrate !== 'undefined') ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="aBitrate">b:a </label>
+							<input type="text" id="aBitrate" value={(options.aBitrate !== 'undefined') ? options.aBitrate : defaultValues.aBitrate} onChange={handleBitrate}></input>
+						</div>
+						<input type="checkbox" checked={(options.aBitrate !== 'undefined') ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="audioQuality">q:a </label>
 							<input type="number" id="audioQuality" min="0" max="10" step=".5" value={(options.audioQuality !== 'undefined') ? options.audioQuality : defaultValues.audioQuality} onChange={handleVorbisQuality} />
 						</div>
 						<input type="checkbox" checked={(options.audioQuality !== 'undefined') ? true : false} onChange={handleToggle} />
