@@ -11,11 +11,10 @@ const Video = (props) => {
 	}, [fileObject]);
 
 	const isVisible = (videoRef.current == undefined) ? {visibility: 'hidden'} : {visibility: 'visible'}
-	const videoNode =  
+    const videoNode =  
 			<video ref={videoRef} id="video" style={isVisible} controls>
-				<source src={fileObject.url} type={fileObject.type} />
+				<source src={fileObject.url} />
 			</video>;
-
 	return (
 		<div className="video">
 			{videoNode}
