@@ -3,7 +3,6 @@ import StartPage from './StartPage';
 import Capture from './Capture/Capture';
 import Bakery from './Bakery/Bakery';
 import Tasks from './Tasks/Tasks';
-import './HeaderLayout.css';
 
 const HeaderLayout = () => {
 

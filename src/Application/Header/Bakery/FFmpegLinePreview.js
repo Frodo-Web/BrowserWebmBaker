@@ -6,7 +6,13 @@ const FFmpegLinePreview = (props) => {
 
 	return (
 		<h2>
-			 ffmpeg -ss {options.startPosition} -i {options.filename} -t {options.duration} 
+			 ffmpeg 
+			 -ss {options.startPosition}
+			 {(options.subsIndex !== 'undefined') ? ' -copyts' : ''} 
+			 -i {options.filename} 
+			 {(options.subsIndex !== 'undefined') ? ` -ss ${options.startPosition} ` : ''}
+			-vf colormatrix=bt709:bt601{(options.subsIndex !== 'undefined') ? `,subtitles=${options.filename}:si=${options.subsIndex}` : ''}
+			 {' -t'} {options.duration} 
 			 {(options.qmin !== 'undefined') ? ` -qmin: ${options.qmin}` : ''} 
 			 {(options.qmax !== 'undefined') ? ` -qmax: ${options.qmax}` : ''} 
 			 {(options.qcomp !== 'undefined') ? ` -qcomp: ${options.qcomp}` : ''}

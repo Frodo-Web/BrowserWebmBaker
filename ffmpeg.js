@@ -3,12 +3,20 @@ const { spawnSync } = require('child_process');
 
 const FFmpeg = (task) => {
     console.log(task)
-    const inputFile = yourPaths.inputFolder + '\\' + task.filename;
-    const outputFile = yourPaths.outputFolder + '\\' + task.outputFileName;
+
+    const inputFile = yourPaths.WindowsJoinFileToPath(yourPaths.inputFolder, task.filename);
+    const outputFile = yourPaths.WindowsJoinFileToPath(yourPaths.outputFolder, task.outputFileName);
+    const escapedFullPath = yourPaths.WindowsAddSlashes(inputFile);
+
+    let vFilter = 'colormatrix=bt709:bt601';
+    vFilter = (task.subsIndex !== 'undefined') ? vFilter + `,subtitles=${escapedFullPath}:si=${task.subsIndex}` : vFilter;
 
     const basicArgs = [
         '-ss', (task.startPosition).toString(),
+        ... (task.subsIndex !== 'undefined') ? ['-copyts'] : [],
         '-i', inputFile,
+        ... (task.subsIndex !== 'undefined') ? ['-ss', (task.startPosition).toString()] : [],
+        '-vf', vFilter,
         '-t', (task.duration).toString(),
         ... (task.qmin !== 'undefined') ? ['-qmin', (task.qmin).toString()] : [],
         ... (task.qmax !== 'undefined') ? ['-qmax', (task.qmax).toString()] : [],
@@ -22,6 +30,8 @@ const FFmpeg = (task) => {
         ... (task.audioQuality !== 'undefined') ? ['-q:a', (task.audioQuality).toString()] : [],
         ... (task.threads !== 'undefined') ? ['-threads', (task.threads).toString()] : [],
         ... (task.cpuUsed !== 'undefined') ? ['-cpu-used', (task.cpuUsed).toString()] : [],
+        '-sn', '-y',
+
     ]
     const runFFmpeg = (args) => {
         const result = spawnSync('ffmpeg', args, { stdio: 'inherit', encoding: 'utf8' });

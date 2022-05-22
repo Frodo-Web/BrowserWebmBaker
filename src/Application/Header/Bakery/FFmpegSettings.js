@@ -10,12 +10,15 @@ const FFmpegSettings = () => {
 	useEffect(() => {
 		getPositions();
 		getCapture();
-	}, []);
+	}, []); 
 
 /*	useEffect(() => {
-		console.log("getBakery()");
-		getBakery();
-	}, [options]); */
+		console.log("change")
+		const bakery = getStorage('bakery');
+		if (bakery?.options?.vCodec === 'libvpx') {
+			setCodec(<VP8 options={options} />);
+		}
+	}, [options]) */
 
 	const getStorage = (key) => {
 		const data = localStorage.getItem(key);
@@ -25,15 +28,6 @@ const FFmpegSettings = () => {
 		};
 		return null;
 	};
-
-/*	const getBakery = () => {
-		const bakery = getStorage('bakery');
-		if (bakery != null) {
-			console.log(options.filename);
-			if (bakery.options.vCodec === 'libvpx') setCodec(<VP8 options={options} />);
-			if (bakery.options.vCodec === 'libvpx-vp9') setCodec(<VP9 options={options} />);
-		};
-	}; */
 
 	const getCapture = () => {
 		const capture = getStorage('capture');

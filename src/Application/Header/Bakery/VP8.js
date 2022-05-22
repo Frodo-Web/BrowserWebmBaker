@@ -5,10 +5,10 @@ const VP8 = (props) => {
 	
 	const defaultValues = {
 		qmin: 0, qmax: 40, qcomp: 0.6, crf: 10, deadline: 'best', vCodec: 'libvpx', vBitrate: '1000K',
-		aCodec: 'libvorbis', aBitrate: '192K', audioQuality: 3, threads: 1, cpuUsed: 0, pass: true,
+		aCodec: 'libvorbis', aBitrate: '192K', audioQuality: 3, threads: 1, cpuUsed: 0, subsIndex: 0, pass: true,
 	};
 
-	const [options, setOptions] = useState({...props.options, ...defaultValues, aBitrate: 'undefined' });
+	const [options, setOptions] = useState({...props.options, ...defaultValues, aBitrate: 'undefined', subsIndex: 'undefined' });
 
 	useEffect(() => {
 		const defaultOutputFileName = getDefaultOutputFilename();
@@ -82,6 +82,11 @@ const VP8 = (props) => {
 		if (e.target.id === "cpuUsed" && value <= 2) {
 			setOptions(prevOptions => {
 				return {...prevOptions, cpuUsed: value}
+			});
+		};
+		if (e.target.id === "subsIndex") {
+			setOptions(prevOptions => {
+				return {...prevOptions, subsIndex: value}
 			});
 		};
 	};
@@ -251,6 +256,13 @@ const VP8 = (props) => {
 							<input type="number" id="cpuUsed" min="0" max="2" step="1" value={(options.cpuUsed !== 'undefined') ? options.cpuUsed : defaultValues.cpuUsed} onChange={commonHandler}/>
 						</div>
 						<input type="checkbox" checked={(options.cpuUsed !== 'undefined') ? true : false} onChange={handleToggle} />
+					</div>
+					<div>
+						<div>
+							<label htmlFor="subsIndex">Burn subtitles from container. Subs index: </label>
+							<input type="number" id="subsIndex" min="0" step="1" value={(options.subsIndex !== 'undefined') ? options.subsIndex : defaultValues.subsIndex} onChange={commonHandler}/>
+						</div>
+						<input type="checkbox" checked={(options.subsIndex !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
 					<label htmlFor="pass">double pass: </label>
 					<input type="checkbox" id="pass" checked={options.pass} onChange={handlePass} />
