@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SetVideoTime from './SetVideoTime';
 import MakePositions from './MakePositions';
+import './VideoSettings.css';
 
 const VideoSettings = (props) => {
 

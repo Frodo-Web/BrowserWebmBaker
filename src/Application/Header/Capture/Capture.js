@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import SelectFile from './SelectFile';
 import getVideoURL from './getVideoURL';
 import Video from './Video/Video';
+import './Capture.css'
 
 const Capture = () => {
 	const [fileObject, setFileObject] = useState({});

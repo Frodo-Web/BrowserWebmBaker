@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './SetVideoTime.css';
 
 const SetVideoTime = (props) => {
 
@@ -47,7 +48,6 @@ const SetVideoTime = (props) => {
     return (
 		<div className="setPositions">
 			<div className="currentTime">
-				<h2>Current time: {currentTime}</h2>
 				<label htmlFor="currentTime">Current time: </label>
 				<input type="text" id="currentTime" value={currentTime} onChange={firstSlider} />
 			</div>

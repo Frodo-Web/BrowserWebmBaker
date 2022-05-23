@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import VP8 from './VP8';
 import VP9 from './VP9';
+import './FFmpegSettings.css';
 
 const FFmpegSettings = () => {
 
@@ -42,13 +43,13 @@ const FFmpegSettings = () => {
 	const vp9 = () => setCodec(<VP9 options={{empty: "empty"}} />); 
 
 	return (
-	<div id="codec">
-		<ul>
-			<li><a onClick={vp8}>VP8</a></li>
-			<li><a onClick={vp9}>VP9</a></li>
-		</ul>
-		{codec}
-	</div>
+		<div id="codec">
+			<nav>
+				<a onClick={vp8}>VP8</a>
+				<a onClick={vp9}>VP9</a>
+			</nav>
+			{codec}
+		</div>
 	       )
 };
 

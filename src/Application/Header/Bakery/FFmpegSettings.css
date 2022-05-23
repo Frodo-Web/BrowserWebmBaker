@@ -1,0 +1,46 @@
+div#codec {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
+div#codec nav {
+    display: flex;
+    column-gap: 25px;
+}
+
+div#codec nav a {
+    display: block;
+    margin: auto;
+    padding: 1rem 1.25rem;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    transition: all .3s cubic-bezier(.2, 0, 0, 1);
+    z-index: 1;
+}
+div#codec nav a:after {
+    content: '';
+    display: block;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    right: 1.25rem;
+    left: 1.25rem;
+    background-color: #ffffff;
+    transition: all .3s cubic-bezier(.2, 0, 0, 1);
+    transform-origin: bottom center;
+    z-index: -1;
+}
+    
+div#codec nav a:hover {
+    color: #2D2D2D;
+}
+div#codec nav a:hover:after {
+    right: 0;
+    left: 0;
+    height: 100%;
+}
+    
+  

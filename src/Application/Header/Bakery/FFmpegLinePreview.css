@@ -1,0 +1,17 @@
+div#ffmpegLinePreview {
+    border: 2px solid #6EE7B7;
+    padding: 10px;
+    font-size: 20px;
+    color: #93C5FD;
+}
+div#ffmpegLinePreview:hover {
+    border: 5px solid #6EE7B7;
+}
+div#ffmpegLinePreview span {
+    color: #F0ABFC;
+    font-weight: bold;
+}
+div#ffmpegLinePreview span.fileName {
+    color: #7DD3FC;
+    font-style: italic;
+}

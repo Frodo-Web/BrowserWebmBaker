@@ -1,0 +1,4 @@
+section#capture {
+    display: flex;
+    flex-direction: column;
+}
