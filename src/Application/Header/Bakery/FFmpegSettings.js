@@ -5,55 +5,41 @@ import VP9 from './VP9';
 const FFmpegSettings = () => {
 
 	const [codec, setCodec] = useState(<h2>Choose your codec</h2>);
-	const [options, setOptions] = useState({});
 
 	useEffect(() => {
-		getPositions();
-		getCapture();
-	}, []); 
-
-/*	useEffect(() => {
-		console.log("change")
 		const bakery = getStorage('bakery');
 		if (bakery?.options?.vCodec === 'libvpx') {
-			setCodec(<VP8 options={options} />);
+			setCodec(<VP8 options={parseVP8()} />);
 		}
-	}, [options]) */
+	}, []);
 
 	const getStorage = (key) => {
 		const data = localStorage.getItem(key);
-		if (data != null) {
+		if (data !== null) {
 			const dataObject = JSON.parse(data);
 			return dataObject;
 		};
 		return null;
 	};
 
-	const getCapture = () => {
+	const parseVP8 = () => {
+		let vp8Options = {};
 		const capture = getStorage('capture');
-		if (capture != null) {
-			setOptions(prevOptions => {
-				return {...prevOptions, filename: capture.f_name}
-			});
-		};
-	};
-
-	const getPositions = () => {
+		if (capture !== null) {
+			vp8Options = {...vp8Options, filename: capture.f_name}
+		}
 		const positions = getStorage('makepositions');
-		if (positions != null) {
+		if (positions !== null) {
 			const t = Math.floor((positions.f_endPosition - positions.f_startPosition) * 10000) / 10000;
-			setOptions(prevOptions => {
-				return {...prevOptions, startPosition: positions.f_startPosition, endPosition: positions.f_endPosition, duration: t}
-			});
+			vp8Options = {...vp8Options, startPosition: positions.f_startPosition, endPosition: positions.f_endPosition, duration: t}
 		} else {
-			setOptions(prevOptions => {
-				return {...prevOptions, startPosition: 0, endPosition: 0, duration: 0}
-			});
-		};
+			vp8Options = {...vp8Options, startPosition: 0, endPosition: 0, duration: 0}
+		}
+		return vp8Options;
 	};
 
-	const vp8 = () => setCodec(<VP8 options={options} />);
-	const vp9 = () => setCodec(<VP9 options={options} />);
+	const vp8 = () => setCodec(<VP8 options={parseVP8()} />);
+	const vp9 = () => setCodec(<VP9 options={{empty: "empty"}} />); 
 
 	return (
 		<>

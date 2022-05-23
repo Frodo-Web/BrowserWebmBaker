@@ -24,7 +24,7 @@ const VP8 = (props) => {
 
 	const getOptionsFromStorage = () => {
 		const bakery = localStorage.getItem('bakery');
-		if (bakery != null) {
+		if (bakery !== null) {
 			let bakeryObject = JSON.parse(bakery);
 			if (bakeryObject.options.filename !== props.options.filename 
 				|| bakeryObject.options.duration !== props.options.duration 
@@ -39,7 +39,7 @@ const VP8 = (props) => {
 	};
 
 	const getDefaultOutputFilename = () => {
-		if (options.filename != undefined) {
+		if (options.filename !== undefined) {
 			const unixTimestampSeconds = Math.floor(Date.now() / 1000);
 			const separatedByExtension = (options.filename).split(/.([0-9a-z]+)(?:[\?#]|$)/);
 			return separatedByExtension[0] + '-' + unixTimestampSeconds.toString() + '.' + separatedByExtension[1]; 
@@ -58,17 +58,17 @@ const VP8 = (props) => {
 	const commonHandler = (e) => {
 		const value = parseInt(e.target.value);
 		if (value <= 63) {
-			if (e.target.id === "qmin" && value < options.qmax) {
+			if (e.target.id === "qmin") {
 				setOptions(prevOptions => {
 					return {...prevOptions, qmin: value} 
 				});
 			};
-			if (e.target.id === "qmax" && value > options.qmin) {
+			if (e.target.id === "qmax") {
 				setOptions(prevOptions => {
 					return {...prevOptions, qmax: value}
 				});
 			};
-			if (e.target.id === "crf" && value >= 4 ) {
+			if (e.target.id === "crf") {
 				setOptions(prevOptions => {
 					return {...prevOptions, crf: value}
 				});
