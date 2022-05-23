@@ -1,0 +1,91 @@
+div#root {
+    display: flex;
+}
+
+div#sidebar {
+    flex-basis: 10%; 
+}
+div.container {
+    flex-basis: 90%;
+}
+
+:root {
+    --primary-color: #D96AA7;
+    --secondary-color: #422C73;
+    --complimentary-color: #88BFB5;
+    --contrast-color: #F2E527;
+    --light-color: #D2A9D9;
+}
+.container {
+    background: #191919;
+    min-height: 100vh;
+    font-family: Montserrat, sans-serif;
+    padding-left: 50px;
+}
+
+nav#navigation a {
+    font-size: 40px;
+    color: #fff;
+    text-decoration: none;
+    padding: 20px;
+    text-align: center;
+}
+nav#navigation {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 100%;
+    background: var(--secondary-color);
+}
+
+div.container section {
+    top: 0;
+    height: 100vh;
+    width: 0;
+    opacity: 0;
+    transition: all ease-in .5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} 
+
+div.container section:target {
+    opacity: 1;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+} 
+
+/*nav#navigation {
+    position: fixed;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--secondary-color);
+}
+
+section {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 0;
+    opacity: 0;
+    transition: all ease-in .5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} 
+section:target {
+    opacity: 1;
+    position: absolute;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+} */

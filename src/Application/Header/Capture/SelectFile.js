@@ -1,4 +1,5 @@
 import React from 'react';
+import './SelectFile.css';
 
 const SelectFile = (props) => {
 	return (

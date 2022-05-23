@@ -47,11 +47,11 @@ const Tasks = () => {
 		});
 	};
 	return (
-		<>
+		<section id="tasks">
 			<h2>Tasks: </h2>
 			<SendTasksToServer tasks={tasks} />
 			<ul>{listTasks}</ul>
-		</>
+		</section>
 	       );
 };
 

@@ -4,9 +4,9 @@ import FFmpegSettings from './FFmpegSettings';
 const Bakery = () => {
 
 	return (
-		<>
+		<section id="bakery">
 			<FFmpegSettings />
-		</>
+		</section>
 	       );
 };
 

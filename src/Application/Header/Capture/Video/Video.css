@@ -1,0 +1,6 @@
+#video {
+    border: 1px solid rgb(15, 122, 184);
+}
+#video:hover {
+    border: 5px solid rgb(15, 209, 144);
+}

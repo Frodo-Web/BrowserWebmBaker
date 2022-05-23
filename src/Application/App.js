@@ -10,8 +10,8 @@ const App = () => {
 	localStorage.removeItem('tasks');
 
 	return (
-		<HeaderLayout />
-         )
+	<HeaderLayout />
+           )
 };
 
 export default App;

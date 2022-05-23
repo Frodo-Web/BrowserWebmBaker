@@ -42,15 +42,13 @@ const FFmpegSettings = () => {
 	const vp9 = () => setCodec(<VP9 options={{empty: "empty"}} />); 
 
 	return (
-		<>
-			<nav id="codec">
-				<ul>
-					<li><a onClick={vp8}>VP8</a></li>
-					<li><a onClick={vp9}>VP9</a></li>
-				</ul>
-			</nav>
-			{codec}
-		</>
+	<div id="codec">
+		<ul>
+			<li><a onClick={vp8}>VP8</a></li>
+			<li><a onClick={vp9}>VP9</a></li>
+		</ul>
+		{codec}
+	</div>
 	       )
 };
 

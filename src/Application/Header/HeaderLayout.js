@@ -3,6 +3,8 @@ import StartPage from './StartPage';
 import Capture from './Capture/Capture';
 import Bakery from './Bakery/Bakery';
 import Tasks from './Tasks/Tasks';
+import './HeaderLayout.css';
+
 
 const HeaderLayout = () => {
 
@@ -14,26 +16,19 @@ const HeaderLayout = () => {
 	const tasks = () => setContent(<Tasks />);
 
 	return (
-		<>
+	<>
+		<div id="sidebar">
 			<nav id="navigation">
-				<ul>
-					<li>
-						<a onClick={startpage}>Start Page</a>
-					</li>
-					<li>
-						<a onClick={capture}>Capture</a>
-					</li>
-					<li>
-						<a onClick={bakery}>Bakery</a>
-					</li>
-					<li>
-						<a onClick={tasks}>Tasks</a>
-					</li>
-				</ul>
+				<a href="#startPage" onClick={startpage}>Start Page</a>
+				<a href="#capture" onClick={capture}>Capture</a>
+				<a href="#bakery" onClick={bakery}>Bakery</a>
+				<a href="#tasks" onClick={tasks}>Tasks</a>
 			</nav>
+		</div>
+		<div className="container">
 			{content}
-
-		</>
+		</div>
+	</>
 	       )
 };
 

@@ -31,10 +31,10 @@ const Capture = () => {
 	};
 
 	return (
-		<div className="capture">
+		<section id="capture">
 		   <SelectFile onFileSelect={onSelect} />
 			 <Video fileObject={fileObject} />
-		</div>
+		</section>
          );
 };
 

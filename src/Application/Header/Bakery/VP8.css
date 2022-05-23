@@ -1,0 +1,22 @@
+input[type="number"],
+input[type="text"] {
+	background-color: #94A3B8;
+	vertical-align: top;
+	outline: none;
+	padding: 0;
+	height: 40px;
+	line-height: 40px;    
+	text-indent: 10px;
+	display: inline-block;
+	width: 10%;
+	box-sizing: border-box;
+	border: 1px solid #33bcce;
+	font-size: 14px;
+	border-radius: 3px;
+
+} 
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+	outline: 2px solid #4ADE80;
+}
