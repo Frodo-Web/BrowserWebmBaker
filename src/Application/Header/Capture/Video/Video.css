@@ -2,6 +2,7 @@ div.video {
     display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap: 12px;
 }
 #video {
     border: 1px solid rgb(15, 122, 184);

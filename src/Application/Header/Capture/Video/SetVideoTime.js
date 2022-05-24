@@ -27,10 +27,6 @@ const SetVideoTime = (props) => {
 		};
 	}, [props.duration]);
 
-	const sliderWidth = {
-		width: '70vw',
-	};
-
 	const firstSlider = (e) => {
 		const value = parseFloat(e.target.value);
 		setCurrentTime(value);
@@ -52,12 +48,12 @@ const SetVideoTime = (props) => {
 				<input type="text" id="currentTime" value={currentTime} onChange={firstSlider} />
 			</div>
 		  <div className="firstSlider">
-				<label htmlFor="firstSlider">-+{firstSliderStep} between 0 and {duration}</label>
-				<input style={sliderWidth} type="range" id="firstSlider" min="0" max={duration} step={firstSliderStep} value={currentTime} onChange={firstSlider}/>
+				<label htmlFor="firstSlider">-+{firstSliderStep}: 0{'⇄'}{duration} (Click on me then use keyboard arrows ⇐ ⇒ for better accuracy)</label>
+				<input type="range" id="firstSlider" min="0" max={duration} step={firstSliderStep} value={currentTime} onChange={firstSlider}/>
 			</div>
 			<div className="secondSlider">
-					<label htmlFor="secondSlider">-+{secondSliderStep} between 0 and 1</label>
-					<input style={sliderWidth} type="range" id="secondSlider" min="0" max="1" step={secondSliderStep} value={secondSliderValue} onChange={secondSlider} />
+					<label htmlFor="secondSlider">-+{secondSliderStep}: 0{'⇄'}1</label>
+					<input type="range" id="secondSlider" min="0" max="1" step={secondSliderStep} value={secondSliderValue} onChange={secondSlider} />
 			</div>
 		</div>
 		        )

@@ -3,3 +3,38 @@ div.setPositions {
     flex-direction: column;
     row-gap: 10px;
 }
+div.firstSlider input#firstSlider,
+div.secondSlider input#secondSlider {
+    width: 100%;
+}
+/* From uiverse.io by @alexruix */
+input#currentTime {
+    line-height: 28px;
+    font-size: 24px;
+    font-weight: bold;
+    max-width: 145px;
+    border: 2px solid transparent;
+    border-bottom-color: #777;
+    padding: .2rem .2rem;
+    outline: none;
+    background-color: transparent;
+    color: #1DC9A0;
+    transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+   }
+   
+input#currentTime:focus, input#currentTime:hover {
+    outline: none;
+    padding: .2rem 1.2rem;
+    border-radius: 1rem;
+    border-color: #7a9cc6;
+   }
+   
+input#currentTime::placeholder {
+    color: #777;
+   }
+   
+input#currentTime:focus::placeholder {
+    opacity: 0;
+    transition: opacity .3s;
+   }
+   

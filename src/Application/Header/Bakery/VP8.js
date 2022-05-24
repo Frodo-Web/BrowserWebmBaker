@@ -176,14 +176,24 @@ const VP8 = (props) => {
 			<form >
 				<fieldset>
 					<legend>VP8:</legend>
-					<label htmlFor="ss">-ss </label>
-					<input id="ss" type="text" value={options.startPosition} disabled/>
-					<label htmlFor="t">-t </label>
-					<input id="t" type="text" value={options.duration} disabled/>
-					<label htmlFor="inputFilename">Input Filename: </label>
-					<input id="inputFilename" type="text" value={options.filename} disabled/>
-					<label htmlFor="outputFilename">Output Filename: </label>
-					<input id="outputFilename" type="text" value={options.outputFileName} onChange={handleOutputFilename}/>
+					<div>Capture Data</div>
+					<div id="captureData">
+						<div>
+							<label htmlFor="ss">-ss </label>
+							<input id="ss" type="text" value={options.startPosition} disabled/>
+						</div>
+						<div>
+							<label htmlFor="t">-t </label>
+							<input id="t" type="text" value={options.duration} disabled/>
+						</div>
+						<div>
+								<label htmlFor="inputFilename">Input Filename: </label>
+								<input id="inputFilename" type="text" value={options.filename} disabled/>
+						</div>
+					</div>
+
+				<div>Video Quality Settings</div>
+				<div id="videoQualitySettings">
 					<div>
 						<div>
 							<label htmlFor="qmin">qmin </label>
@@ -231,6 +241,9 @@ const VP8 = (props) => {
 						</div>
 						<input type="checkbox" checked={(options.vBitrate !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
+				</div>
+				<div>Audio Quality Settings</div>
+			    <div id="audioQualitySettings">
 					<div>
 						<div>
 							<label htmlFor="aBitrate">b:a </label>
@@ -245,6 +258,9 @@ const VP8 = (props) => {
 						</div>
 						<input type="checkbox" checked={(options.audioQuality !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
+			    </div>
+				<div>Multi-threading Settings</div>
+				<div id="multiThreadingSettings">
 					<div>
 						<div>
 							<label htmlFor="threads">threads </label>
@@ -259,6 +275,8 @@ const VP8 = (props) => {
 						</div>
 						<input type="checkbox" checked={(options.cpuUsed !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
+				</div>
+				<div id="subtitlesSettings">
 					<div>
 						<div>
 							<label htmlFor="subsIndex">Burn subtitles from container. Subs index: </label>
@@ -266,8 +284,15 @@ const VP8 = (props) => {
 						</div>
 						<input type="checkbox" checked={(options.subsIndex !== 'undefined') ? true : false} onChange={handleToggle} />
 					</div>
+				</div>
+				<div id="enableDoublePass">
 					<label htmlFor="pass">double pass: </label>
 					<input type="checkbox" id="pass" checked={options.pass} onChange={handlePass} />
+				</div>
+				<div>
+						<label htmlFor="outputFilename">Output Filename: </label>
+						<input id="outputFilename" type="text" value={options.outputFileName} onChange={handleOutputFilename}/>
+				</div>
 					<button type="button" id="addTask" onClick={addTask}>Add to Tasks</button>
 				</fieldset>
 			</form>

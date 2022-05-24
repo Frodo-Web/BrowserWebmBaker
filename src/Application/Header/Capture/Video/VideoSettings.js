@@ -19,7 +19,7 @@ const VideoSettings = (props) => {
 		if (fileObject.name != undefined) {
 			return (
 				<div id="filename">
-					<h1>Filename: {fileObject.name}</h1>
+					Filename: {fileObject.name}
 				</div>
 			)
 		};
@@ -29,7 +29,7 @@ const VideoSettings = (props) => {
 		if (videoElement != undefined) {
 			return (
 				<div id="duration">
-					<h2>Duration: {duration}</h2>
+					Duration: {duration}
 				</div>
 			       )
 		};

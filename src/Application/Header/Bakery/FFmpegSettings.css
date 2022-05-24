@@ -1,6 +1,7 @@
 div#codec {
     display: flex;
     flex-direction: column;
+    align-items: center;
     row-gap: 25px;
 }
 div#codec nav {

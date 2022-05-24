@@ -10,7 +10,7 @@ const MakePositions = (props) => {
 	const [endPosition, setEndPosition] = useState(0);
 	const [lockString, setLockString] = useState('');
 
-	const lockStates = {success: 'Locked successfully!', whoops: "Whoops! Wrong Positions, can't lock with these positions"};
+	const lockStates = {success: 'Locked successfully!', whoops: "Whoops! Wrong Positions."};
 
 	useEffect(() => {
 		const makepositions = localStorage.getItem('makepositions');

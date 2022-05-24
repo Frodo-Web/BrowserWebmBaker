@@ -2,16 +2,17 @@ div#ffmpegLinePreview {
     border: 2px solid #6EE7B7;
     padding: 10px;
     font-size: 20px;
-    color: #93C5FD;
+    color: #6baefa;
+    max-width: 70vw;
 }
 div#ffmpegLinePreview:hover {
     border: 5px solid #6EE7B7;
 }
 div#ffmpegLinePreview span {
-    color: #F0ABFC;
+    color: #e47bf7;
     font-weight: bold;
 }
 div#ffmpegLinePreview span.fileName {
-    color: #7DD3FC;
+    color: #30b8f7;
     font-style: italic;
 }

@@ -1,7 +1,7 @@
 div.makePositions {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	gap: 25px;
+	gap: 12px;
 }
 /* From uiverse.io by @mobinkakei */
 .btn-lock {

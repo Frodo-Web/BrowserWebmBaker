@@ -1,22 +1,134 @@
-input[type="number"],
-input[type="text"] {
-	background-color: #94A3B8;
-	vertical-align: top;
-	outline: none;
-	padding: 0;
-	height: 40px;
-	line-height: 40px;    
-	text-indent: 10px;
-	display: inline-block;
-	width: 10%;
-	box-sizing: border-box;
-	border: 1px solid #33bcce;
-	font-size: 14px;
-	border-radius: 3px;
-
-} 
-
-input[type="number"]:focus,
-input[type="text"]:focus {
-	outline: 2px solid #4ADE80;
+form {
+	width: 70vw;
 }
+#captureData {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 15px;
+	row-gap: 15px;
+}
+#videoQualitySettings {
+	display: grid;
+	grid-template-columns: minmax(200px, 250px) minmax(200px, 250px) minmax(200px, 250px);
+	justify-content: start;
+	row-gap: 15px;
+/*	justify-items: center; */
+}
+#videoQualitySettings div {
+	display: flex;
+}
+#audioQualitySettings {
+	display: grid;
+	grid-template-columns: minmax(200px, 250px) minmax(200px, 250px);
+	justify-content: start;
+}
+#audioQualitySettings div {
+	display: flex;
+}
+#multiThreadingSettings {
+	display: grid;
+	grid-template-columns: minmax(200px, 250px) minmax(200px, 250px);
+	justify-content: start;
+}
+#multiThreadingSettings div {
+	display: flex;
+}
+#subtitlesSettings div {
+	display: flex;
+}
+fieldset {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 20px;
+}
+
+fieldset input[type="text"],
+fieldset input[type="number"] {
+    line-height: 28px;
+    font-size: 24px;
+    font-weight: bold;
+    max-width: 145px; 
+    border: 2px solid transparent;
+    border-bottom-color: #777;
+    padding: .2rem .2rem;
+    outline: none;
+    background-color: transparent;
+    color: #1DC9A0;
+    transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+   
+fieldset input[type="text"]:focus, fieldset input[type="text"]:hover,
+fieldset input[type="number"]:focus, fieldset input[type="number"]:hover {
+    outline: none;
+    padding: .2rem 1.2rem;
+    border-radius: 1rem;
+    border-color: #7a9cc6;
+}
+   
+fieldset input[type="text"]::placeholder,
+fieldset input[type="number"]::placeholder {
+    color: #777;
+}
+   
+fieldset input[type="text"]:focus::placeholder,
+fieldset input[type="number"]:focus::placeholder {
+    opacity: 0;
+    transition: opacity .3s;
+}
+fieldset input[type="text"]:disabled {
+	background-color: #777;
+}
+fieldset input#outputFilename,
+fieldset input#inputFilename { 
+	min-width: 30vw;
+	max-width: 50vw;
+}
+div select {
+	font-size: 1.2em;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px;
+	background-color: #191919;
+	color: #1DC9A0;
+	font-size: inherit;
+	padding: .5em;
+	padding-right: 2.5em;	
+	border: 0;
+	margin: 0;
+	border-radius: 3px;
+	text-indent: 0.01px;
+	text-overflow: '';
+	-webkit-appearance: button;
+}
+div select::before,
+div select::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+div select::after { 
+	content: "\25BC";
+	height: 1em;
+	font-size: .625em;
+	line-height: 1;
+	right: 1.2em;
+	top: 50%;
+	margin-top: -.5em;
+  }
+  
+  div select::before { 
+	width: 2em;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 0 3px 3px 0;
+  }
+  div select::before {
+	background-color: rgba(0,0,0,.15);
+  }
+  
+  div select::after {
+	color: rgba(0,0,0,.4);
+  }
